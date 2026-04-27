@@ -73,6 +73,10 @@ paths:
                       type: "double"
                     - name: "in_stock"
                       type: "bool"
+                    - name: "sale_start_date"
+                      type: "datetime"
+                    - name: "store_location"
+                      type: "geopoint"
       responses:
         '201':
           description: Catalog created successfully.
@@ -568,11 +572,13 @@ paths:
                     link: "https://link.in/"
                     image_link: "https://link.in/"
                     price_currency: "USD"
-                    creation_date: "2024-05-10T07:03:00.180000"
-                    last_updated: "2024-05-10T07:03:00.180000"
+                    creation_date: "2024-05-10T07:03:00.18Z"
+                    last_updated: "2024-05-10T07:03:00.18Z"
                     product_id: "string"
                     price: 29.99
-                    date: "2022-04-05T00:00:00"
+                    date: "2022-04-05T00:00:00.00Z"
+                    sale_start_date: "2025-08-27T19:26:38.00Z"
+                    store_location: "12.9716,77.5946"
         '400':
           description: Bad Request - Invalid request format or item count validation failed.
           content:
@@ -631,7 +637,13 @@ components:
           description: The name of the attribute (e.g., 'color', 'price').
         type:
           type: string
-          description: The data type of the attribute.
+          description: |
+            The data type of the attribute. Supported values:
+            - `string` — text values.
+            - `bool` — boolean values (`true` or `false`).
+            - `double` — numeric values, including decimals.
+            - `datetime` — ISO 8601 timestamp with milliseconds and a UTC offset (`Z` or `±HH:mm`). Example: `2025-08-27T19:26:38.00Z`.
+            - `geopoint` — a geographic coordinate as `"latitude,longitude"`. Example: `"12.9716,77.5946"`.
           enum: [string, bool, double, datetime, geopoint]
     CreateCatalogRequest:
       type: object
@@ -692,6 +704,8 @@ components:
         brand_attribute: "Super Tech"
         in_stock: true
         price: 19.99
+        sale_start_date: "2025-08-27T19:26:38.00Z"
+        store_location: "12.9716,77.5946"
     ItemUpdate:
       type: object
       required:
