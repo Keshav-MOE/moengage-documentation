@@ -28,7 +28,23 @@ Follow these steps to integrate JWT authentication into your Capacitor applicati
 
 ### Step 1: Enable JWT Authentication
 
-You can enable JWT authentication during [SDK initialization]() by configuring the [**plaecholder**](placeholder for link).[**plaecholder**]() property on the [**plaecholder**]() object.
+You can enable JWT authentication during [SDK initialization]() by configuring the [**placeholder**](placeholder).[**placeholder**]() property on the [**placeholder**]() object.
+
+#### Android
+
+<CodeGroup>
+
+```kotlin Kotlin wrap
+[placeholder]
+```
+
+```java Java wrap
+[placeholder]
+```
+
+</CodeGroup>
+
+#### iOS
 
 <CodeGroup>
 
@@ -36,8 +52,7 @@ You can enable JWT authentication during [SDK initialization]() by configuring t
 [placeholder]
 ```
 
-
-```objective-c Objective C wrap
+```objective-c Objective-C wrap
 [placeholder]
 ```
 
@@ -49,52 +64,25 @@ Your application is responsible for managing the JWT lifecycle. The recommended 
 
 Use the [**_placeholder_**](placeholder) method to provide the token to the SDK.
 
-<CodeGroup>
-
-```swift Swift wrap
-[Placeholder]
+```typescript TypeScript wrap
+[placeholder]
 ```
 
+### Step 3: Register the listener after SDK initialization
 
-```objective-c Objective C wrap
-[Placeholder]
+Register the [**placeholder**](placeholder) in a global scope, such as the [**placeholder**](placeholder) method of your AppDelegate class, to ensure your application always receives callbacks.
+
+```typescript TypeScript wrap
+[placeholder]
 ```
 
-</CodeGroup>
-
-### Step 3: Handle Authentication Errors
+### Step 4: Handle Authentication Errors
 
 To handle token validation errors that the MoEngage server returns, you must register an error listener using [**_placeholder_**](placeholder) method. The SDK invokes this listener when an authentication error occurs, which allows your application to fetch and provide a new token.
 
-<CodeGroup>
-
-```swift Swift wrap
+```typescript TypeScript wrap
 [placeholder]
 ```
-
-
-```objective-c Objective C wrap
-[Placeholder]
-```
-
-</CodeGroup>
-
-### Step 4: Register the listener after SDK initialization
-
-Register the [**placeholder**](placeholder) in a global scope, such as the [**placeholder] method of your AppDelegate class, to ensure your application always receives callbacks.
-
-<CodeGroup>
-
-```swift Swift wrap
-[placeholder]
-```
-
-
-```objective-c Objective C wrap
-[placeholder]
-```
-
-</CodeGroup>
 
 <Info>
   **Information**
@@ -103,3 +91,4 @@ Register the [**placeholder**](placeholder) in a global scope, such as the [**pl
   - After 10 consecutive authentication failures in a single session, the SDK will stop attempting to sync data until the next session begins. This counter resets after any successful sync.
   - Upon user logout, if a data sync fails due to a JWT error, the pending data will be deleted, and no retry will be attempted.
 </Info>
+
