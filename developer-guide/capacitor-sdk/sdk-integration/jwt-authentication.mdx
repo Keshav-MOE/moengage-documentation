@@ -75,7 +75,38 @@ Your application is responsible for managing the JWT lifecycle. The recommended 
 Use the [**_placeholder_**](placeholder) method to provide the token to the SDK.
 
 ```typescript TypeScript wrap
-[placeholder]
+`import {
+  MoECapacitorCore,
+  MoEAuthenticationType,
+  MoEAuthenticationData,
+  MoEJwtAuthenticationData,
+} from 'capacitor-moengage-core';
+
+MoECapacitorCore.passAuthenticationDetails({
+  appId: 'YOUR_WORKSPACE_ID',
+  authenticationData: MoEAuthenticationData
+});`
+
+Interface for MoEAuthenticationData
+`export interface MoEAuthenticationData {
+  authenticationType: MoEAuthenticationType
+  data: MoEAuthenticationDetails // for JWT, use MoEJwtAuthenticationData
+}`
+
+Enum for MoEAuthenticationType
+`export enum MoEAuthenticationType {
+  JWT = 'JWT'
+}`
+
+Interface for MoEJwtAuthenticationData 
+
+`export interface MoEJwtAuthenticationData {
+  token: string;
+  userIdentifier: string;
+}`
+
+
+
 ```
 
 ### Step 3: Register the listener after SDK initialization
