@@ -48,6 +48,8 @@ You can enable JWT authentication during [SDK initialization]() by configuring t
 
 ```java Java wrap
 [placeholder]
+`MoEngage.Builder moEngage = new MoEngage.Builder(this, "YOUR_WORKSPACE_ID", DataCenter.DATA_CENTER_X) //existing configurations
+    .configureNetworkRequest(new NetworkRequestConfig(new NetworkAuthorizationConfig(true, true)));`
 ```
 
 </CodeGroup>
