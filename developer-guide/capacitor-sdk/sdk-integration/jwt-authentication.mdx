@@ -36,6 +36,15 @@ You can enable JWT authentication during [SDK initialization]() by configuring t
 
 ```kotlin Kotlin wrap
 [placeholder]
+`val moEngage = MoEngage.Builder(this, "YOUR_WORKSPACE_ID", DataCenter.DATA_CENTER_X) //Existing configurations
+    .configureNetworkRequest(
+        NetworkRequestConfig(
+            networkAuthorizationConfig = NetworkAuthorizationConfig(
+                isJwtEnabled = true,
+                shouldEnableForAllUsers = true
+            )
+        )
+    )`
 ```
 
 ```java Java wrap
