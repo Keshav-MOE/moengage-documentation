@@ -89,7 +89,50 @@ Register the [**placeholder**](placeholder) in a global scope, such as the [**pl
 To handle token validation errors that the MoEngage server returns, you must register an error listener using [**_placeholder_**](placeholder) method. The SDK invokes this listener when an authentication error occurs, which allows your application to fetch and provide a new token.
 
 ```typescript TypeScript wrap
-[placeholder]
+`import {
+  MoECapacitorCore,
+  MoEAuthenticationType,
+  MoEAuthenticationErrorData,
+  MoEJwtAuthenticationErrorData,
+  MoEJwtErrorCode,
+} from 'capacitor-moengage-core';
+MoECapacitorCore.addListener('authenticationError', (error: MoEAuthenticationErrorData) => {
+  if (error.authenticationType === MoEAuthenticationType.JWT) {
+    const errorData = error.data as MoEJwtAuthenticationErrorData;
+    const jwtError = errorData.code;
+    const message = errorData.message;
+    // Take appropriate action based on jwtError
+    // e.g. fetch a new token and call passAuthenticationDetails again
+  }
+});`
+
+Below are the interfaces and enums.
+
+`export interface MoEAuthenticationErrorData {
+  accountMeta: MoEAccountMeta;
+  platform: MoEPlatform;
+  authenticationType: MoEAuthenticationType;
+  data: MoEAuthenticationErrorDetails; // for JWT, use MoEJwtAuthenticationErrorData
+}
+export interface MoEJwtAuthenticationErrorData  {
+  code: MoEJwtErrorCode;
+  token: string;
+  userIdentifier: string;
+  message: string;
+}
+export enum MoEAuthenticationType {
+  JWT = 'JWT',
+}
+export enum MoEJwtErrorCode {
+  TimeConstraintFailure = 'TIME_CONSTRAINT_FAILURE',
+  DecryptionFailed = 'DECRYPTION_FAILED',
+  HeaderTypeIncompatible = 'HEADER_TYPE_INCOMPATIBLE',
+  PayloadContentMissing = 'PAYLOAD_CONTENT_MISSING',
+  InvalidSignature = 'INVALID_SIGNATURE',
+  IdentifierMismatch = 'IDENTIFIER_MISMATCH',
+  Unknown = 'UNKNOWN',
+  TokenNotAvailable = 'TOKEN_NOT_AVAILABLE',
+}`
 ```
 
 <Info>
