@@ -47,7 +47,6 @@ You can enable JWT authentication during [SDK initialization]() by configuring t
 ```
 
 ```java Java wrap
-[placeholder]
 `MoEngage.Builder moEngage = new MoEngage.Builder(this, "YOUR_WORKSPACE_ID", DataCenter.DATA_CENTER_X) //existing configurations
     .configureNetworkRequest(new NetworkRequestConfig(new NetworkAuthorizationConfig(true, true)));`
 ```
@@ -114,7 +113,12 @@ Interface for MoEJwtAuthenticationData
 The payload for authentication error data is returned via a callback. Register a callback as shown below.
 
 ```typescript TypeScript wrap
-[placeholder]
+import { MoECapacitorCore, MoEAuthenticationErrorData, } from 'capacitor-moengage-core'; 
+
+MoECapacitorCore.addListener('authenticationError', (data: MoEAuthenticationErrorData) => { 
+  // handle in step 4 
+});
+
 ```
 
 ### Step 4: Handle Authentication Errors
