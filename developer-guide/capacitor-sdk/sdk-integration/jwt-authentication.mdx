@@ -58,7 +58,12 @@ You can enable JWT authentication during [SDK initialization]() by configuring t
 <CodeGroup>
 
 ```swift Swift wrap
-[placeholder]
+let sdkConfig = MoEngageSDKConfig(appId: "YOUR_WORKSPACE_ID", dataCenter: .data_center_01)
+sdkConfig.appGroupID = "group.com.alphadevs.MoEngage.NotificationServices"
+sdkConfig.consoleLogConfig = MoEngageConsoleLogConfig(isLoggingEnabled: true, loglevel: .verbose)
+sdkConfig.networkConfig = MoEngageNetworkAuthorizationConfig(isJwtEnabled: true, shouldEnableForAllUsers: true)
+let config = MoEngageSDKInitializationConfig(sdkConfig: sdkConfig)
+MoECapacitorInitializer.sharedInstance.initializeInstance(withConfig: config)
 ```
 
 ```objective-c Objective-C wrap
