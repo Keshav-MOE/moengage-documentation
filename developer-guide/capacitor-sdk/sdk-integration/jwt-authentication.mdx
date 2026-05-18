@@ -28,9 +28,10 @@ Follow these steps to integrate JWT authentication into your Capacitor applicati
 
 ### Step 1: Enable JWT Authentication
 
-You can enable JWT authentication during [SDK initialization]() by configuring the [**placeholder**](placeholder).[**placeholder**]() property on the [**placeholder**]() object.
-
 #### Android
+
+You can enable JWT authentication during [SDK initialization](https://www.moengage.com/docs/developer-guide/android-sdk/sdk-integration/basic-integration/sdk-initialization) by configuring the **NetworkAuthorizationConfig** property on the **MoEngage.Builder** object.
+
 
 <CodeGroup>
 
@@ -55,6 +56,7 @@ You can enable JWT authentication during [SDK initialization]() by configuring t
 
 #### iOS
 
+You can enable JWT authentication during [SDK initialization](https://www.moengage.com/docs/developer-guide/ios-sdk/sdk-integration/basic/sdk-initialization) by configuring the by configuring the **networkConfig** property on the **MoEngageSDKConfig** object.
 <CodeGroup>
 
 ```swift Swift wrap
@@ -76,7 +78,7 @@ MoECapacitorInitializer.sharedInstance.initializeInstance(withConfig: config)
 
 Your application is responsible for managing the JWT lifecycle. The recommended flow is to fetch a token upon user login and pass the token to the SDK. You should also check if the token has expired on subsequent app launches and fetch a new one if necessary.
 
-Use the [**_placeholder_**](placeholder) method to provide the token to the SDK.
+Use the **passAuthenticationDetails** method to provide the token to the SDK.
 
 ```typescript TypeScript wrap
 `import {
