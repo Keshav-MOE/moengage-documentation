@@ -81,7 +81,7 @@ Your application is responsible for managing the JWT lifecycle. The recommended 
 Use the **passAuthenticationDetails** method to provide the token to the SDK.
 
 ```typescript TypeScript wrap
-`import {
+import {
   MoECapacitorCore,
   MoEAuthenticationType,
   MoEAuthenticationData,
@@ -95,7 +95,7 @@ MoECapacitorCore.passAuthenticationDetails({
 
 
 ```
-For detailed information, refer to [Interface Definitions](##Integrafce Definitions).
+For detailed information, refer to [Interface and Enums](#interface-and-enums).
 
 ### Step 3: Register the listener after SDK initialization
 
@@ -115,7 +115,7 @@ MoECapacitorCore.addListener('authenticationError' (data: MoEAuthenticationError
 To handle token validation errors that the MoEngage server returns, you must register an error listener. The SDK invokes this listener when an authentication error occurs, which allows your application to fetch and provide a new token.
 
 ```typescript TypeScript wrap
-`import {
+import {
   MoECapacitorCore,
   MoEAuthenticationType,
   MoEAuthenticationErrorData,
@@ -133,12 +133,12 @@ MoECapacitorCore.addListener('authenticationError', (error: MoEAuthenticationErr
 });
 
 ```
-For detailed information, refer to [Interface Definitions](##Integrafce Definitions).
+For detailed information, refer to [Interface and Enums](#interface-and-enums).
 
-## Interface Definitions 
+## Interface and Enums 
 
 
-```
+```typescript TypeScript wrap
 //Interface for MoEAuthenticationData
 interface MoEAuthenticationData {
   authenticationType: MoEAuthenticationType
