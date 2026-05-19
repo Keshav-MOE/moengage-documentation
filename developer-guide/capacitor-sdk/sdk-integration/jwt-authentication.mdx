@@ -91,38 +91,20 @@ Use the **passAuthenticationDetails** method to provide the token to the SDK.
 MoECapacitorCore.passAuthenticationDetails({
   appId: 'YOUR_WORKSPACE_ID',
   authenticationData: MoEAuthenticationData
-});`
-
-Interface for MoEAuthenticationData
-`export interface MoEAuthenticationData {
-  authenticationType: MoEAuthenticationType
-  data: MoEAuthenticationDetails // for JWT, use MoEJwtAuthenticationData
-}`
-
-Enum for MoEAuthenticationType
-`export enum MoEAuthenticationType {
-  JWT = 'JWT'
-}`
-
-Interface for MoEJwtAuthenticationData 
-
-`export interface MoEJwtAuthenticationData {
-  token: string;
-  userIdentifier: string;
-}`
-
+});
 
 
 ```
+For detailed information, refer to [Interface Definitions](##Integrafce Definitions).
 
 ### Step 3: Register the listener after SDK initialization
 
 The payload for authentication error data is returned via a callback. Register a callback as shown below.
 
 ```typescript TypeScript wrap
-import { MoECapacitorCore, MoEAuthenticationErrorData, } from 'capacitor-moengage-core'; 
+import { MoECapacitorCore, MoEAuthenticationErrorData } from 'capacitor-moengage-core'; 
 
-MoECapacitorCore.addListener('authenticationError', (data: MoEAuthenticationErrorData) => { 
+MoECapacitorCore.addListener('authenticationError' (data: MoEAuthenticationErrorData) => { 
   // handle in step 4 
 });
 
@@ -138,7 +120,7 @@ To handle token validation errors that the MoEngage server returns, you must reg
   MoEAuthenticationType,
   MoEAuthenticationErrorData,
   MoEJwtAuthenticationErrorData,
-  MoEJwtErrorCode,
+  MoEJwtErrorCode
 } from 'capacitor-moengage-core';
 MoECapacitorCore.addListener('authenticationError', (error: MoEAuthenticationErrorData) => {
   if (error.authenticationType === MoEAuthenticationType.JWT) {
@@ -148,26 +130,55 @@ MoECapacitorCore.addListener('authenticationError', (error: MoEAuthenticationErr
     // Take appropriate action based on jwtError
     // e.g. fetch a new token and call passAuthenticationDetails again
   }
-});`
+});
 
-Below are the interfaces and enums.
+```
+For detailed information, refer to [Interface Definitions](##Integrafce Definitions).
 
-`export interface MoEAuthenticationErrorData {
+## Interface Definitions 
+
+
+```
+//Interface for MoEAuthenticationData
+interface MoEAuthenticationData {
+  authenticationType: MoEAuthenticationType
+  data: MoEAuthenticationDetails // for JWT, use MoEJwtAuthenticationData
+}
+
+//Enum for MoEAuthenticationType
+enum MoEAuthenticationType {
+  JWT = 'JWT'
+}
+
+//Interface for MoEJwtAuthenticationData 
+interface MoEJwtAuthenticationData {
+  token: string;
+  userIdentifier: string;
+}
+
+//Interface for MoEAuthenticationErrorData 
+ interface MoEAuthenticationErrorData {
   accountMeta: MoEAccountMeta;
   platform: MoEPlatform;
   authenticationType: MoEAuthenticationType;
   data: MoEAuthenticationErrorDetails; // for JWT, use MoEJwtAuthenticationErrorData
 }
-export interface MoEJwtAuthenticationErrorData  {
+
+//Interface for MoEJwtAuthenticationErrorData 
+ interface MoEJwtAuthenticationErrorData  {
   code: MoEJwtErrorCode;
   token: string;
   userIdentifier: string;
   message: string;
 }
-export enum MoEAuthenticationType {
+
+//Enum for MoEAuthenticationType 
+ enum MoEAuthenticationType {
   JWT = 'JWT',
 }
-export enum MoEJwtErrorCode {
+
+//Enum for MoEJwtErrorCode 
+ enum MoEJwtErrorCode {
   TimeConstraintFailure = 'TIME_CONSTRAINT_FAILURE',
   DecryptionFailed = 'DECRYPTION_FAILED',
   HeaderTypeIncompatible = 'HEADER_TYPE_INCOMPATIBLE',
@@ -177,6 +188,7 @@ export enum MoEJwtErrorCode {
   Unknown = 'UNKNOWN',
   TokenNotAvailable = 'TOKEN_NOT_AVAILABLE',
 }`
+
 ```
 
 <Info>
