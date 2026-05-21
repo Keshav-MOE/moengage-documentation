@@ -30,7 +30,7 @@ Follow these steps to integrate JWT authentication into your Capacitor applicati
 
 #### Android
 
-You can enable JWT authentication during [SDK initialization](https://www.moengage.com/docs/developer-guide/android-sdk/sdk-integration/basic-integration/sdk-initialization) by configuring the **NetworkAuthorizationConfig** property on the **MoEngage.Builder** object.
+You can enable JWT authentication during SDK initialization by configuring the **NetworkAuthorizationConfig** property on the **MoEngage.Builder** object.
 
 
 <CodeGroup>
@@ -56,20 +56,19 @@ You can enable JWT authentication during [SDK initialization](https://www.moenga
 
 #### iOS
 
-You can enable JWT authentication during [SDK initialization](https://www.moengage.com/docs/developer-guide/ios-sdk/sdk-integration/basic/sdk-initialization) by configuring the **networkConfig** property on the **MoEngageSDKConfig** object.
+You can enable JWT authentication during SDK initialization by configuring the **networkConfig** property on the **MoEngageSDKConfig** object.
 <CodeGroup>
 
 ```swift Swift wrap
-let sdkConfig = MoEngageSDKConfig(appId: "YOUR_WORKSPACE_ID", dataCenter: .data_center_01)
-sdkConfig.appGroupID = "group.com.alphadevs.MoEngage.NotificationServices"
-sdkConfig.consoleLogConfig = MoEngageConsoleLogConfig(isLoggingEnabled: true, loglevel: .verbose)
-sdkConfig.networkConfig = MoEngageNetworkAuthorizationConfig(isJwtEnabled: true, shouldEnableForAllUsers: true)
-let config = MoEngageSDKInitializationConfig(sdkConfig: sdkConfig)
-MoECapacitorInitializer.sharedInstance.initializeInstance(withConfig: config)
+let sdkConfig = MoEngageSDKConfig(appId: "YOUR_APP_ID", dataCenter: .YOUR_DATA_CENTER)
+sdkConfig.networkConfig = MoEngageNetworkRequestConfig(authorizationConfig: MoEngageNetworkAuthorizationConfig(isJwtEnabled: true))
+MoECapacitorInitializer.sharedInstance.initializeDefaultInstance(sdkConfig, andLaunchOptions: nil)
 ```
 
 ```objective-c Objective-C wrap
-[placeholder]
+MoEngageSDKConfig* sdkConfig = [[MoEngageSDKConfig alloc] initWithAppId:@"YOUR_APP_ID" dataCenter:YOUR_DATA_CENTER];
+sdkConfig.networkConfig = [[MoEngageNetworkRequestConfig alloc] initWithAuthorizationConfig:[[MoEngageNetworkAuthorizationConfig alloc] initWithIsJwtEnabled:YES]];
+[[MoECapacitorInitializer sharedInstance] initializeDefaultInstance:sdkConfig andLaunchOptions:nil];
 ```
 
 </CodeGroup>
