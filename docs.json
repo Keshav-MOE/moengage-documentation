@@ -1967,6 +1967,14 @@
                 ]
               },
               {
+                "group": "MoEngage Go: The MoEngage Mobile App",
+                "pages": [
+                  "user-guide/moengage-go/moengage-go-overview",
+                  "user-guide/moengage-go/moengage-go-install-and-signin",
+                  "user-guide/moengage-go/moengage-go-monitor-and-manage-campaigns"
+                ]
+              },
+              {
                 "group": "Contact Support",
                 "pages": [
                   {
