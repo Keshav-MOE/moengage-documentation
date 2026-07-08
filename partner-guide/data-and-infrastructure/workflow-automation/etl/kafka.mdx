@@ -1,5 +1,6 @@
 ---
 title: "Kafka"
+description: "Stream events from Apache Kafka topics to MoEngage in near real time using a Kafka consumer and the MoEngage ingestion API."
 ---
 
 ## Introduction
@@ -272,7 +273,7 @@ python3 kafka_consumer.py
 
 **Expected console output:**
 
-```text Sample Logs
+```text Sample Logs wrap
 [INFO] Consumer started. Topics: ['user-events']
 [INFO] MoEngage endpoint: https://api-02.moengage.com/v1/partner/your-company/events/?configName=15fc62d8...
 [INFO] Event sent successfully (status 200)
@@ -398,25 +399,18 @@ Choose a deployment method based on your infrastructure. MoEngage supports the f
     ```bash
     # Build image
     docker build -t kafka-moengage:latest .
-     
-    Run container
-     
-    docker run -d
-     
-    --name kafka-moengage
-     
-    --env-file .env
-     
-    --restart unless-stopped
-     
-    kafka-moengage:latest
-     
-    View logs
-     
+    
+    # Run container
+    docker run -d \
+      --name kafka-moengage \
+      --env-file .env \
+      --restart unless-stopped \
+      kafka-moengage:latest
+    
+    # View logs
     docker logs -f kafka-moengage
-     
-    Stop container
-     
+    
+    # Stop container
     docker stop kafka-moengage
     ```
 
@@ -480,15 +474,11 @@ Choose a deployment method based on your infrastructure. MoEngage supports the f
     Securely store your sensitive MoEngage and Kafka credentials by creating a Kubernetes Secret object with the following:
 
     ```bash
-    kubectl create secret generic kafka-moengage
-     
-    --from-literal=MOENGAGE_APP_ID=your_app_id
-     
-    --from-literal=MOENGAGE_API_SECRET=your_secret
-     
-    --from-literal=KAFKA_API_KEY=your_kafka_key
-     
-    --from-literal=KAFKA_API_SECRET=your_kafka_secret	
+    kubectl create secret generic kafka-moengage \
+      --from-literal=MOENGAGE_APP_ID=your_app_id \
+      --from-literal=MOENGAGE_API_SECRET=your_secret \
+      --from-literal=KAFKA_API_KEY=your_kafka_key \
+      --from-literal=KAFKA_API_SECRET=your_kafka_secret
     ```
 
     **2. Create deployment.yaml**
@@ -568,6 +558,12 @@ Choose a deployment method based on your infrastructure. MoEngage supports the f
     **Scalability:** Automatic horizontal pod autoscaling
   </Tab>
 </Tabs>
+
+### Rate Limits
+
+To maintain platform stability, MoEngage limits ingestion of Kafka data to a maximum of 500 requests per second (RPS) per workspace. If your workspace exceeds this limit, MoEngage returns an HTTP `429 (Too Many Requests)` status code.
+
+Handle `429` responses in your consumer script by backing off and retrying, so events are not dropped when the limit is reached. The sample script already retries on server errors; extend the same logic to cover rate-limit responses.
 
 ### Troubleshooting
 
